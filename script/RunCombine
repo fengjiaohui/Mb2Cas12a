@@ -1,0 +1,5 @@
+gatk  SelectVariants  -select-type INDEL -V Combine.vcf.gz -O Combine.INDEL.vcf.gz
+gatk  SelectVariants  -select-type SNP -V Combine.vcf.gz -O Combine.SNP.vcf.gz
+gatk VariantFiltration -V Combine.INDEL.vcf.gz -O Combine.INDEL.TEMP.vcf.gz --filter-expression "QD < 20.0 || FS > 10.0 || ReadPosRankSum < -8.0 || MQ < 40.0 || FS > 60.0 || SOR > 3.0 || MQRankSum < -12.5 " --filter-name "Filter"
+gatk VariantFiltration -V Combine.SNP.vcf.gz -O Combine.SNP.TEMP.vcf.gz --filter-expression "QD < 20.0 || FS > 10.0 || ReadPosRankSum < -8.0 || MQ < 40.0 || FS > 60.0 || SOR > 3.0 || MQRankSum < -12.5 " --filter-name "Filter"
+
